@@ -60,6 +60,9 @@ const Iframes = () => {
         <iframe title={'Basket'} allowtransparency frameborder='0' height='160' scrolling='no' src='https://www.strava.com/clubs/841063/latest-rides/4e1d7bcb6e82dff8415fdaf3c1731e8a91b9b129?show_rides=false' width='300'></iframe>
       </div>
       <div style={innerStyled}>
+        <iframe allowtransparency frameborder='0' height='160' scrolling='no' src='https://www.strava.com/clubs/841476/latest-rides/db83728ec4a27859defc304a35ca285e8965b361?show_rides=false' width='300'></iframe>
+      </div>
+      <div style={innerStyled}>
         <iframe title={'Volleyball'} allowtransparency frameborder="0" height="160" scrolling="no" src="https://www.strava.com/clubs/840512/latest-rides/8a811c1626b6310e2c4ae31b13df7db0b8976c86?show_rides=false" width="300"></iframe>
       </div>
     </ElementWrapper>
@@ -70,7 +73,7 @@ function App() {
 
   const [state, setState] = useState("loading")
 
-  const start = new Date(2021, 1, 1)
+  const start = new Date(2021, 1, 1, 7, 0, 0)
 
   useEffect(() => {
 

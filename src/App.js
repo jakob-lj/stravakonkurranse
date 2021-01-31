@@ -70,7 +70,7 @@ function App() {
 
   const [state, setState] = useState("loading")
 
-  const start = new Date(2021, 0, 1)
+  const start = new Date(2021, 1, 1)
 
   useEffect(() => {
 

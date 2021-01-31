@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from 'react';
 import './App.css';
-import styled from 'styled-components'
 
 const innerStyled = {
   margin: ' 1em'
@@ -32,7 +31,7 @@ const CountDown = ({ goal, text }) => {
   const seconds = getTimeString((diff / 1000) % 60);
   const minutes = getTimeString(diff / (1000 * 60) % 60);
   const hours = getTimeString(diff / (1000 * 3600) % 24);
-  const days = getTimeString(diff / (1000 * 3600 * 24) % 24);
+  const days = getTimeString(diff / (1000 * 3600 * 24));
 
   const ts = `${days}:${hours}:${minutes}:${seconds}`
 
@@ -48,13 +47,11 @@ const CountDown = ({ goal, text }) => {
   </div>
 }
 
-const ElementWrapper = styled.div`
-  display: flex;
-  
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-`
+const ElementWrapper = ({ children }) => {
+  return <div className={'elementWrapper'}>
+    {children}
+  </div>
+}
 
 const Iframes = () => {
   return (
@@ -73,7 +70,7 @@ function App() {
 
   const [state, setState] = useState("loading")
 
-  const start = new Date(2021, 2, 1)
+  const start = new Date(2021, 0, 1)
 
   useEffect(() => {
 
@@ -93,7 +90,7 @@ function App() {
 
   if (state === "notStarted") {
     return <Wrapper>
-      <CountDown goal={new Date(2021, 1, 1)} text={"Konkurransen begynner om"} />
+      <CountDown goal={start} text={"Konkurransen begynner om"} />
     </Wrapper>
   }
 
@@ -105,7 +102,6 @@ function App() {
         display: 'block',
         height: '4em'
       }}>
-
       </div>
       {state === "started" && <Iframes />}
     </Wrapper>

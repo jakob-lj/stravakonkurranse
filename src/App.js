@@ -15,12 +15,15 @@ const getTimeString = (num) => {
   }
 }
 
-const CountDown = ({ goal, text }) => {
+const CountDown = ({ goal, text, setState }) => {
 
   const [now, setNow] = useState(new Date())
 
   useEffect(() => {
     const interval = setInterval(() => {
+      if (goal <= new Date()) {
+        setState("ended")
+      }
       setNow(new Date());
     }, 100);
     return () => clearInterval(interval);
@@ -74,11 +77,15 @@ function App() {
   const [state, setState] = useState("loading")
 
   const start = new Date(2021, 1, 1, 7, 0, 0)
+  const end = new Date(2021, 1, 7, 22, 50, 0)
 
   useEffect(() => {
 
-    if (start < new Date()) {
+    if (end < new Date()) {
+      setState("ended")
+    } else if (start < new Date()) {
       setState("started")
+
     } else {
       setState("notStarted")
     }
@@ -100,13 +107,14 @@ function App() {
 
   return (
     <Wrapper>
-      <CountDown goal={new Date(2021, 1, 8)} text={"Konkurransen avsluttes om"} />
+      {state !== "ended" && <CountDown setState={setState} goal={end} text={"Konkurransen avsluttes om"} />}
       <div style={{
         display: 'block',
         height: '4em'
       }}>
       </div>
       {state === "started" && <Iframes />}
+      {state === "ended" && <><h3>Konkurransen er avsluttet</h3><h5>Gratulerer til NTNUI Volleyball med seier og 877 km!</h5></>}
     </Wrapper>
 
   );
